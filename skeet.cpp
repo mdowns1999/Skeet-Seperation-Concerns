@@ -222,22 +222,22 @@ void Skeet::drawTimer(double percent,
  *   INPUT  topLeft   The top left corner of the text
  *          text      The text to be displayed
  ************************************************************************/
-void drawText(const Point& topLeft, const char* text) 
-{
-   void* pFont = GLUT_TEXT;
-   glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
+// void drawText(const Point& topLeft, const char* text) 
+// {
+//    void* pFont = GLUT_TEXT;
+//    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
 
-   // prepare to output the text from the top-left corner
-   glRasterPos2f((GLfloat)topLeft.getX(), (GLfloat)topLeft.getY());
+//    // prepare to output the text from the top-left corner
+//    glRasterPos2f((GLfloat)topLeft.getX(), (GLfloat)topLeft.getY());
 
-   // loop through the text
-   for (const char* p = text; *p; p++)
-      glutBitmapCharacter(pFont, *p);
-}
-void drawText(const Point & topLeft, const string & text)
-{
-   drawText(topLeft, text.c_str());
-}
+//    // loop through the text
+//    for (const char* p = text; *p; p++)
+//       glutBitmapCharacter(pFont, *p);
+// }
+// void drawText(const Point & topLeft, const string & text)
+// {
+//    drawText(topLeft, text.c_str());
+// }
 
 /************************
  * SKEET DRAW LEVEL
@@ -260,9 +260,9 @@ void Skeet::drawLevel() const
       element->draw();
    
    // status
-   drawText(Point(10,                         dimensions.getY() - 30), score.getText()  );
-   drawText(Point(dimensions.getX() / 2 - 30, dimensions.getY() - 30), time.getText()   );
-   drawText(Point(dimensions.getX() - 110,    dimensions.getY() - 30), hitRatio.getText());
+   //drawText(Point(10,                         dimensions.getY() - 30), score.getText()  );
+  // drawText(Point(dimensions.getX() / 2 - 30, dimensions.getY() - 30), time.getText()   );
+  // drawText(Point(dimensions.getX() - 110,    dimensions.getY() - 30), hitRatio.getText());
 }
 
 /************************
@@ -276,12 +276,12 @@ void Skeet::drawStatus() const
    if (time.isGameOver())
    {
       // draw the end of game message
-      drawText(Point(dimensions.getX() / 2 - 30, dimensions.getY() / 2 + 10),
-               "Game Over");
+      //drawText(Point(dimensions.getX() / 2 - 30, dimensions.getY() / 2 + 10),
+               //"Game Over");
 
       // draw end of game status
-      drawText(Point(dimensions.getX() / 2 - 30, dimensions.getY() / 2 - 10),
-               score.getText());
+     // drawText(Point(dimensions.getX() / 2 - 30, dimensions.getY() / 2 - 10),
+               //score.getText());
    }
    else
    {
@@ -293,8 +293,8 @@ void Skeet::drawStatus() const
       // draw the message giving a countdown
       sout << "Level " << time.level()
            << " begins in " << time.secondsLeft() << " seconds";
-      drawText(Point(dimensions.getX() / 2 - 110, dimensions.getY() / 2 - 10),
-         sout.str());
+      //drawText(Point(dimensions.getX() / 2 - 110, dimensions.getY() / 2 - 10),
+      //   sout.str());
    }
 }
 
