@@ -47,6 +47,7 @@
     <ClInclude Include="effect.h" />
     <ClInclude Include="gun.h" />
     <ClInclude Include="point.h" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="skeet.h" />
     <ClInclude Include="skeetLogic.h" />

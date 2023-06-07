@@ -176,7 +176,7 @@ void SkeetUI::drawLevel() const
    for (auto bullet : pLogic->pStorage->bullets)
      bullet->output();
    for (auto element : pLogic->pStorage->birds)
-     element->draw();
+     element->pBirdUI->draw(element);
    
    // status
    drawText(Point(10, dimensions.getY() - 30), pLogic->pStorage->score.getText());

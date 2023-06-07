@@ -6,8 +6,12 @@
  * Summary:
  *    Logic for things the bird does
  ***************************************************************************/
-
+  
 #pragma once
+#include "bird.h"
+#include <assert.h>
+//#include "random.h"
+
 
  /*********************************************
  * BIRD LOGIC
@@ -15,6 +19,14 @@
  *********************************************/
 class BirdLogic
 {
+public:
+   virtual void advance(Bird *pBird) = 0;
+
+   bool isOutOfBounds(Bird* pBird) const
+   {
+      return (pBird->pt.getX() < -pBird->radius || pBird->pt.getX() >= pBird->dimensions.getX() + pBird->radius ||
+         pBird->pt.getY() < -pBird->radius || pBird->pt.getY() >= pBird->dimensions.getY() + pBird->radius);
+   }
 };
 
 /*********************************************
@@ -23,6 +35,7 @@ class BirdLogic
 *********************************************/
 class StandardLogic : public BirdLogic
 {
+   void advance(Bird *pBird);
 };
 
 /*********************************************
@@ -31,6 +44,7 @@ class StandardLogic : public BirdLogic
 *********************************************/
 class CrazyLogic : public BirdLogic
 {
+   void advance(Bird *pBird);
 };
 
 /*********************************************
@@ -39,6 +53,7 @@ class CrazyLogic : public BirdLogic
 *********************************************/
 class FloaterLogic : public BirdLogic
 {
+   void advance(Bird *pBird);
 };
 
 /*********************************************
@@ -47,5 +62,6 @@ class FloaterLogic : public BirdLogic
 *********************************************/
 class SinkerLogic : public BirdLogic
 {
+   void advance(Bird *pBird);
 };
 

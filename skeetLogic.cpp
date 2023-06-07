@@ -24,7 +24,7 @@ void SkeetLogic::animate()
    // move the birds and the bullets
    for (auto element : pStorage->birds)
    {
-     element->advance();
+     element->pBirdLogic->advance(element);
      pStorage->hitRatio.adjust(element->isDead() ? -1 : 0);
    }
    for (auto bullet : pStorage->bullets)
@@ -149,11 +149,12 @@ void SkeetLogic::spawn()
      size = 30.0;
      // spawns when there is nothing on the screen
      if (pStorage->birds.size() == 0 && random(0, 15) == 1)
-        pStorage->birds.push_back(new Standard(size, 7.0));
+     //new Standard(size, 7.0)
+        pStorage->birds.push_back(buildStandard(size, 7.0));
 
      // spawn every 4 seconds
      if (random(0, 4 * 30) == 1)
-        pStorage->birds.push_back(new Standard(size, 7.0));
+        pStorage->birds.push_back(buildStandard(size, 7.0));
      break;
 
      // two kinds of birds in level 2
@@ -161,14 +162,14 @@ void SkeetLogic::spawn()
      size = 25.0;
      // spawns when there is nothing on the screen
      if (pStorage->birds.size() == 0 && random(0, 15) == 1)
-        pStorage->birds.push_back(new Standard(size, 7.0, 12));
+        pStorage->birds.push_back(buildStandard(size, 7.0, 12));
 
      // spawn every 4 seconds
      if (random(0, 4 * 30) == 1)
-        pStorage->birds.push_back(new Standard(size, 5.0, 12));
+        pStorage->birds.push_back(buildStandard(size, 5.0, 12));
      // spawn every 3 seconds
      if (random(0, 3 * 30) == 1)
-        pStorage->birds.push_back(new Sinker(size));
+        pStorage->birds.push_back(buildSinker(size));
      break;
 
      // three kinds of birds in level 3
@@ -176,17 +177,17 @@ void SkeetLogic::spawn()
      size = 20.0;
      // spawns when there is nothing on the screen
      if (pStorage->birds.size() == 0 && random(0, 15) == 1)
-        pStorage->birds.push_back(new Standard(size, 5.0, 15));
+        pStorage->birds.push_back(buildStandard(size, 5.0, 15));
 
      // spawn every 4 seconds
      if (random(0, 4 * 30) == 1)
-        pStorage->birds.push_back(new Standard(size, 5.0, 15));
+        pStorage->birds.push_back(buildStandard(size, 5.0, 15));
      // spawn every 4 seconds
      if (random(0, 4 * 30) == 1)
-        pStorage->birds.push_back(new Sinker(size, 4.0, 22));
+        pStorage->birds.push_back(buildSinker(size, 4.0, 22));
      // spawn every 4 seconds
      if (random(0, 4 * 30) == 1)
-        pStorage->birds.push_back(new Floater(size));
+        pStorage->birds.push_back(buildFloater(size));
      break;
 
      // three kinds of birds in level 4
@@ -194,20 +195,20 @@ void SkeetLogic::spawn()
      size = 15.0;
      // spawns when there is nothing on the screen
      if (pStorage->birds.size() == 0 && random(0, 15) == 1)
-        pStorage->birds.push_back(new Standard(size, 4.0, 18));
+        pStorage->birds.push_back(buildStandard(size, 4.0, 18));
 
      // spawn every 4 seconds
      if (random(0, 4 * 30) == 1)
-        pStorage->birds.push_back(new Standard(size, 4.0, 18));
+        pStorage->birds.push_back(buildStandard(size, 4.0, 18));
      // spawn every 4 seconds
      if (random(0, 4 * 30) == 1)
-        pStorage->birds.push_back(new Sinker(size, 3.5, 25));
+        pStorage->birds.push_back(buildSinker(size, 3.5, 25));
      // spawn every 4 seconds
      if (random(0, 4 * 30) == 1)
-        pStorage->birds.push_back(new Floater(size, 4.0, 25));
+        pStorage->birds.push_back(buildFloater(size, 4.0, 25));
      // spawn every 4 seconds
      if (random(0, 4 * 30) == 1)
-        pStorage->birds.push_back(new Crazy(size));
+        pStorage->birds.push_back(buildCrazy(size));
      break;
 
    default:
@@ -216,3 +217,22 @@ void SkeetLogic::spawn()
 }
 
 bool SkeetLogic::isPlaying() const { return pStorage->time.isPlaying(); }
+
+Bird* SkeetLogic::buildStandard(double radius, double speed, int points) {
+   Bird* pBird = new Bird(radius, speed, points, STANDARD);
+   pBird->setBirdLogic(new StandardLogic());
+   pBird->setBirdUI(new StandardUI());
+   return pBird;
+}
+Bird* SkeetLogic::buildFloater(double radius, double speed, int points) {
+   Bird* pBird = new Bird(radius, speed, points, FLOATER);
+   pBird->setBirdLogic(new FloaterLogic());
+   pBird->setBirdUI(new FloaterUI());
+   return pBird;
+}
+Bird* SkeetLogic::buildCrazy(double radius, double speed, int points) {
+   return new Bird(radius, speed, points, CRAZY);
+}
+Bird* SkeetLogic::buildSinker(double radius, double speed, int points) {
+   return new Bird(radius, speed, points, SINKER);
+}

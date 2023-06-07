@@ -6,15 +6,19 @@
  * Summary:
  *    Interface for Bird
  ***************************************************************************/
-
+ 
 #pragma once
+#include "point.h"
+#include "bird.h"
 
 /*********************************************
 * Bird UI
 * Interface for Bird
-*********************************************/
+*********************************************/ 
 class BirdUI
 {
+public:
+   virtual void draw(Bird* pBird) = 0;
 };
 
 /*********************************************
@@ -23,6 +27,8 @@ class BirdUI
 *********************************************/
 class StandardUI : public BirdUI
 {
+    //StandardUI(double radius = 25.0);
+   void draw(Bird* pBird);
 };
 
 /*********************************************
@@ -31,6 +37,8 @@ class StandardUI : public BirdUI
 *********************************************/
 class CrazyUI : public BirdUI
 {
+   //CrazyUI(double radius = 30.0);
+   void draw(Bird* pBird);
 };
 
 /*********************************************
@@ -39,6 +47,8 @@ class CrazyUI : public BirdUI
 *********************************************/
 class FloaterUI : public BirdUI
 {
+   //FloaterUI(double radius = 30.0);
+   void draw(Bird* pBird);
 };
 
 /*********************************************
@@ -47,5 +57,7 @@ class FloaterUI : public BirdUI
 *********************************************/
 class SinkerUI : public BirdUI
 {
+   //SinkerUI(double radius = 30.0);
+   void draw(Bird* pBird);
 };
 

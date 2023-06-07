@@ -10,6 +10,8 @@
 #pragma once
 #include <list>
 #include "bird.h"
+#include "birdLogic.h"
+#include "birdUI.h"
 #include "bullet.h"
 #include "effect.h"
 #include "gun.h"
